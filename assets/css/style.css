@@ -1,0 +1,12 @@
+#header {
+    background-color: aqua;
+    color: black;
+    font-weight: bold;
+    font-size: 50px;
+    text-align: center;
+}
+
+.card {
+    background-color: tan;
+    padding: 5px;
+}
