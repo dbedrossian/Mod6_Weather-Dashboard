@@ -11,3 +11,8 @@
     color: white;
     padding: 5px;
 }
+
+.historyButton {
+    width: 250px;
+    background-color: lightblue;
+}
