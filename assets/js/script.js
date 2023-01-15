@@ -2,7 +2,7 @@ const button = document.getElementById("button");
 const historySection = document.getElementById("history");
 var date = new Date();
 var formattedDate = "(" + (date.getMonth() + 1) + "/" + (date.getDate()) + "/" + date.getFullYear() + ")";
-var historyButton = document.getElementsByClassName("historyButton");
+var historyButton = document.querySelector(".historyButton");
 
 var APIKey = "cd5888558f293db09d47a6e3ffd05ce4";
 
@@ -10,8 +10,8 @@ var APIKey = "cd5888558f293db09d47a6e3ffd05ce4";
 function getApi() {
     var city = document.getElementById("search-button").value;
     // var city = "Denver";
-    var tempURL = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&APPID=' + APIKey + "&units=imperial";
-    var futureURL = 'http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&APPID=' + APIKey + "&units=imperial&cnt=60";
+    var tempURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&APPID=' + APIKey + "&units=imperial";
+    var futureURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&APPID=' + APIKey + "&units=imperial&cnt=60";
 
     localStorage.setItem("city", city);
   
@@ -34,7 +34,7 @@ function getApi() {
             var humidity = document.getElementById("Humidity");
             var wind = document.getElementById("Wind");
             var iconCode = data.weather[0].icon;
-            var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+            var iconUrl = "https://openweathermap.org/img/w/" + iconCode + ".png";
             icon.setAttribute("src", iconUrl);
 
 
@@ -71,7 +71,7 @@ function getApi() {
             
             var futureIconClass = document.getElementById("icon" + i);
             var iconCode = data.list[forecast].weather[0].icon;
-            var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+            var iconUrl = "https://openweathermap.org/img/w/" + iconCode + ".png";
             futureIconClass.setAttribute("src", iconUrl);   
            
             var futureTempClass = document.getElementById("futureTemp" + i);
@@ -88,15 +88,21 @@ function getApi() {
 
             }
         })
+
+        historyButton.addEventListener("click", function() {
+            historyButton.innerHTML = city;
+        })
 };
+
+function getLastSearch() {
+    var lastSearch = localStorage.getItem("city");
+    if (lastSearch !==null) {
+        document.get
+    }
+}
 
 
 button.addEventListener("click", getApi);
-
-
-
-historyButton.addEventListener("click", getApi)
-
 
 
 
