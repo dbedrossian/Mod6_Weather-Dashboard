@@ -10,18 +10,25 @@ var APIKey = "cd5888558f293db09d47a6e3ffd05ce4";
 function getApi() {
     var city = document.getElementById("search-button").value;
     // var city = "Denver";
-    var tempURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&APPID=' + APIKey + "&units=imperial";
-    var futureURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&APPID=' + APIKey + "&units=imperial&cnt=60";
-
     localStorage.setItem("city", city);
   
     var historyButton = document.createElement("button");
     historyButton.innerText = city;
     historyButton.setAttribute("class", "historyButton");
     historyButton.setAttribute("value", city);
+    historyButton.addEventListener("click", function(event){
+        event.preventDefault();
+        console.log(event.target);
+        currentWeather(event.target.innerHTML)
+        forecastWeather(event.target.innerHTML)
+    })
     historySection.appendChild(historyButton);
- 
+    currentWeather(city)
+    forecastWeather(city)
+};
 
+function currentWeather (city) {
+    var tempURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&APPID=' + APIKey + "&units=imperial";
     fetch(tempURL)
         .then(function (response) {
             return response.json();
@@ -45,7 +52,10 @@ function getApi() {
 
         }
         );
+}
 
+function forecastWeather (city) {
+    var futureURL = 'https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&APPID=' + APIKey + "&units=imperial&cnt=60";
     fetch(futureURL)
         .then(function (response) {
             return response.json();
@@ -88,22 +98,34 @@ function getApi() {
 
             }
         })
-
-        historyButton.addEventListener("click", function() {
-            historyButton.innerHTML = city;
-        })
-};
+}
 
 function getLastSearch() {
     var lastSearch = localStorage.getItem("city");
     if (lastSearch !==null) {
-        document.get
+        document.getElementById
     }
 }
+
+function init() {
+    var getCity = localStorage.getItem("city");
+        console.log(getCity);
+    }
+    // var historyButton = document.createElement("button");
+    // historyButton.innerText = getCity;
+    // historyButton.setAttribute("class", "historyButton");
+    // historyButton.setAttribute("value", city);
+    // historyButton.addEventListener("click", function(event){
+    //     event.preventDefault();
+    //     console.log(event.target);
+    //     currentWeather(event.target.innerHTML)
+    //     forecastWeather(event.target.innerHTML)
+    // })
+// }
 
 
 button.addEventListener("click", getApi);
 
-
+init();
 
 
